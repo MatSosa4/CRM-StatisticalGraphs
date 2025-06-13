@@ -1,0 +1,23 @@
+body {
+  display: flex;
+  margin: 0;
+}
+
+#menu {
+  display: flex;
+  width: 15%;
+  min-width: 200px;
+  height: 100vh;
+  background-color: red;
+}
+
+#graphsWindow {
+  display: flex;
+  flex: 1;
+}
+
+/* for the pages */
+.chartContainer {
+  width: 400px;
+  height: 250px;
+}
