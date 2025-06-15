@@ -15,15 +15,29 @@ app.get('/api/usuarios', async (req, res) => {
 });
 
 app.get('/api/bases', async (req, res) => {
-  const query = await sql`
-    SELECT * FROM BASE;
-  `
+  const { estado } = req.query;
+
+  let query;
+
+  if (estado) {
+    query = await sql`
+      SELECT * FROM BASE
+      WHERE estado_empresa = ${estado};
+    `;
+  } else {
+    query = await sql`
+      SELECT * FROM BASE;
+    `;
+  }
+
   res.json(query);
 });
 
 app.get('/api/contactos', async (req, res) => {
   const query = await sql`
-    SELECT * FROM CONTACTOS;
+    SELECT b.*, u.nombre_usuario, u.cedula_usuario, u.correo_usuario FROM CONTACTOS c 
+    JOIN BASE b ON c.ruc_empresa = b.ruc_empresa
+    JOIN USUARIOS u ON u.id_usuario = c.id_usuario;
   `
   res.json(query);
 });
