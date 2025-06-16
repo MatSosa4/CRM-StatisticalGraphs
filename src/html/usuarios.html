@@ -8,11 +8,21 @@
 </head>
 <body>
   <h1>Usuarios</h1>
+  <select name="select-table" id="select-table">
+    <option value="bases">Base</option>
+    <option value="contactos">Contactos</option>
+    <option value="promociones">Promociones</option>
+    <option value="leads">Leads</option>
+    <option value="propuestas">Propuestas</option>
+    <option value="cierres">Cierres</option>
+  </select>
   <!-- https://www.chartjs.org/docs/latest/ -->
   <!-- Implementar barra de filtrado -->
   <div class="chartContainer">
     <!-- Gráfico cambiante dependiendo de la barra de filtrado -->
-    <canvas class="barChart"></canvas>
+    <canvas class="barChart" id="users-chart"></canvas>
   </div>
+
+  <script type="module" src="../js/usuarios.js"></script>
 </body>
 </html>

@@ -22,7 +22,7 @@ getDataFromAPI('bases?estado=Base').then((res) => {
   // Por cada row, revisar la fecha_modif y obtener su ISOWeek
   // Restar ISOWeek menor a todos para index[]
   res.forEach(row => {
-    const index = moment(row.fecha_ultima_modif_empresa).isoWeek() - weeks[0];  // 25 - 22 = 3
+    const index = moment(row.fecha_modif).isoWeek() - weeks[0];  // 25 - 22 = 3
     data[row.nombre_tipo][index]++
   });
 
@@ -65,7 +65,7 @@ getDataFromAPI('bases?estado=Contacto').then((res) => {
   // Por cada row, revisar la fecha_modif y obtener su ISOWeek
   // Restar ISOWeek menor a todos para index[]
   res.forEach(row => {
-    const index = moment(row.fecha_ultima_modif_empresa).isoWeek() - weeks[0];  // 25 - 22 = 3
+    const index = moment(row.fecha_modif).isoWeek() - weeks[0];  // 25 - 22 = 3
     data[row.nombre_tipo][index]++
   });
 
@@ -108,7 +108,7 @@ getDataFromAPI('bases?estado=Inhabilitado').then((res) => {
   // Por cada row, revisar la fecha_modif y obtener su ISOWeek
   // Restar ISOWeek menor a todos para index[]
   res.forEach(row => {
-    const index = moment(row.fecha_ultima_modif_empresa).isoWeek() - weeks[0];  // 25 - 22 = 3
+    const index = moment(row.fecha_modif).isoWeek() - weeks[0];  // 25 - 22 = 3
     data[row.nombre_tipo][index]++
   });
 

@@ -26,7 +26,8 @@ app.get('/api/bases', async (req, res) => {
   let query;
 
   query = await sql`
-  SELECT * FROM BASE
+  SELECT b.*, b.fecha_ultima_modif_empresa AS fecha_modif, u.nombre_usuario, u.cedula_usuario FROM BASE b
+    JOIN USUARIOS u ON u.id_usuario = b.id_usuario
   WHERE 
     ${estado ? sql`estado_empresa = ${estado}` : sql`TRUE`} AND 
     fecha_ultima_modif_empresa > ${weeks[weeks.length - 1]} AND 
@@ -38,16 +39,17 @@ app.get('/api/bases', async (req, res) => {
 
 app.get('/api/contactos', async (req, res) => {
   const query = await sql`
-  SELECT b.*, u.nombre_usuario, u.cedula_usuario, u.correo_usuario FROM CONTACTOS c 
-  JOIN BASE b ON c.ruc_empresa = b.ruc_empresa
-  JOIN USUARIOS u ON u.id_usuario = c.id_usuario;
+  SELECT b.*, b.fecha_ultima_modif_empresa AS fecha_modif, u.nombre_usuario, u.cedula_usuario, u.correo_usuario FROM CONTACTOS c 
+    JOIN BASE b ON c.ruc_empresa = b.ruc_empresa
+    JOIN USUARIOS u ON u.id_usuario = c.id_usuario;
   `
   res.json(query);
 });
 
 app.get('/api/promociones', async (req, res) => {
   const query = await sql`
-  SELECT * FROM PROMOCIONES;
+  SELECT p.*, p.fecha_modif_promocion AS fecha_modif, u.nombre_usuario, u.cedula_usuario FROM PROMOCIONES p
+    JOIN USUARIOS u ON u.id_usuario = p.id_usuario;
   `
   res.json(query);
 });
@@ -57,7 +59,8 @@ app.get('/api/leads', async (req, res) => {
   const weeks = fecha ? getISOWeekRange(moment(fecha), 4) : getISOWeekRange(moment(), 4);
   
   const query = await sql`
-  SELECT l.*, p.nombre_tipo, p.ruc_empresa FROM LEADS l
+  SELECT l.*, l.fecha_modif_lead AS fecha_modif, p.nombre_tipo, p.ruc_empresa, u.nombre_usuario, u.cedula_usuario FROM LEADS l
+    JOIN USUARIOS u ON u.id_usuario = l.id_usuario
     JOIN PROMOCIONES p ON l.id_promocion = p.id_promocion
   WHERE
     fecha_modif_lead > ${weeks[weeks.length - 1]} AND 
@@ -71,13 +74,14 @@ app.get('/api/propuestas', async (req, res) => {
   const weeks = fecha ? getISOWeekRange(moment(fecha), 4) : getISOWeekRange(moment(), 4);
   
   const query = await sql`
-    SELECT pr.*, p.nombre_tipo, p.ruc_empresa FROM PROPUESTAS pr
-      JOIN LEADS l ON l.id_lead = pr.id_lead
-      JOIN PROMOCIONES p ON l.id_promocion = p.id_promocion
-    WHERE
-      fecha_modif_propuesta > ${weeks[weeks.length - 1]} AND 
-      fecha_modif_propuesta <= ${weeks[0]};
-      `
+  SELECT pr.*, pr.fecha_modif_propuesta AS fecha_modif, p.nombre_tipo, p.ruc_empresa, u.nombre_usuario, u.cedula_usuario FROM PROPUESTAS pr
+    JOIN USUARIOS u ON u.id_usuario = pr.id_usuario
+    JOIN LEADS l ON l.id_lead = pr.id_lead
+    JOIN PROMOCIONES p ON l.id_promocion = p.id_promocion
+  WHERE
+    fecha_modif_propuesta > ${weeks[weeks.length - 1]} AND 
+    fecha_modif_propuesta <= ${weeks[0]};
+    `
   res.json(query);
 });
 
@@ -86,7 +90,8 @@ app.get('/api/cierres', async (req, res) => {
   const weeks = fecha ? getISOWeekRange(moment(fecha), 4) : getISOWeekRange(moment(), 4);
   
   const query = await sql`
-  SELECT c.*, p.nombre_tipo, p.ruc_empresa FROM CIERRES c
+  SELECT c.*, c.firma_contrato_cierre AS fecha_modif, p.nombre_tipo, p.ruc_empresa, u.nombre_usuario, u.cedula_usuario FROM CIERRES c
+    JOIN USUARIOS u ON u.id_usuario = c.id_usuario
     JOIN PROPUESTAS pr ON pr.id_propuesta = c.id_propuesta
     JOIN LEADS l ON l.id_lead = pr.id_lead
     JOIN PROMOCIONES p ON l.id_promocion = p.id_promocion
