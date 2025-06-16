@@ -3,14 +3,15 @@ import moment from 'moment';
 
 import { getDataFromAPI } from "./main";
 import { getISOWeekNumber } from '../backend/utils';
-import { empresas, servicios } from './main';
+import { empresas } from './main';
 
 const basesActivos = document.getElementById('base-activos');
 const contactosActivos = document.getElementById('contactos-activos');
 const basesInhabilitadas = document.getElementById('base-inhabilitados');
 
+const weeks = getISOWeekNumber(moment(), 4);  // [22, 23, 24, 25]
+
 getDataFromAPI('bases?estado=Base').then((res) => {
-  const weeks = getISOWeekNumber(moment(), 4);  // [22, 23, 24, 25]
   const data = {};
 
   // { tipo: [] }
@@ -54,7 +55,6 @@ getDataFromAPI('bases?estado=Base').then((res) => {
 });
 
 getDataFromAPI('bases?estado=Contacto').then((res) => {
-  const weeks = getISOWeekNumber(moment(), 4);  // [22, 23, 24, 25]
   const data = {};
 
   // { tipo: [] }
@@ -98,7 +98,6 @@ getDataFromAPI('bases?estado=Contacto').then((res) => {
 });
 
 getDataFromAPI('bases?estado=Inhabilitado').then((res) => {
-  const weeks = getISOWeekNumber(moment(), 4);  // [22, 23, 24, 25]
   const data = {};
 
   // { tipo: [] }
