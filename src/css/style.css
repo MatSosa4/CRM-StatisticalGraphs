@@ -5,19 +5,27 @@ body {
 
 #menu {
   display: flex;
+  flex-direction: column;
   width: 15%;
   min-width: 200px;
   height: 100vh;
   background-color: red;
 }
 
+.menu_btn {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.1);
+  height: 35px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu_btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
 #graphsWindow {
   display: flex;
   flex: 1;
-}
-
-/* for the pages */
-.chartContainer {
-  width: 400px;
-  height: 250px;
 }

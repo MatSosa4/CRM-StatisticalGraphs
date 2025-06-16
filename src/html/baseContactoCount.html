@@ -7,24 +7,25 @@
   <link rel="stylesheet" href="../css/graphs_style.css">
 </head>
 <body>
+  <h1>Base/Contactos</h1>
   <!-- Implementar barra de filtrado -->
-  <div class="column">
+  <div class="row">
     <div class="chartContainer">
       <!-- Total de Base Activos -->
-      <canvas class="pieChart"></canvas>
+      <canvas class="pieChart" id="base-activos"></canvas>
     </div>
-  </div>
-  <div class="column">
     <div class="chartContainer">
       <!-- Total de Contactos Activos -->
-      <canvas class="pieChart"></canvas>
+      <canvas class="pieChart" id="contactos-activos"></canvas>
     </div>
   </div>
-  <div class="chartContainer">
-    <!-- Total de Bases Inhabilitadas -->
-      <canvas class="barChart"></canvas>
+  <div class="row">
+    <div class="chartContainer">
+      <!-- Total de Bases Inhabilitadas -->
+      <canvas class="barChart" id="base-inhabilitados"></canvas>
     </div>
   </div>
-  
+
+  <script type="module" src="../js/baseContactoCount.js"></script>
 </body>
 </html>

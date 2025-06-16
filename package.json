@@ -12,6 +12,10 @@
     "vite": "^6.3.5"
   },
   "dependencies": {
-    "chart.js": "^4.4.9"
+    "chart.js": "^4.4.9",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "moment": "^2.30.1",
+    "postgres": "^3.4.7"
   }
 }

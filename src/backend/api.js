@@ -1,6 +1,9 @@
 import sql from './sql.js';
+
 import express from 'express';
 import cors from 'cors';
+import moment from 'moment';
+import { getISOWeekRange } from './utils.js';
 
 const app = express();
 const port = 8081;
@@ -15,19 +18,25 @@ app.get('/api/usuarios', async (req, res) => {
 });
 
 app.get('/api/bases', async (req, res) => {
-  const { estado } = req.query;
+  // estado = Base/Contacto/Inhabilitado
+  // fecha = 2025-06-15 YYYY-MM-DD
+  const { estado, fecha } = req.query;
 
+  const weeks = fecha ? getISOWeekRange(moment(fecha), 4) : getISOWeekRange(moment(), 4);
   let query;
 
-  if (estado) {
+  if (estado || fecha) {
     query = await sql`
       SELECT * FROM BASE
-      WHERE estado_empresa = ${estado};
+      WHERE 
+        ${estado ? sql`estado_empresa = ${estado}` : sql`TRUE`} AND 
+        fecha_ultima_modif_empresa > ${weeks[weeks.length - 1]} AND 
+        fecha_ultima_modif_empresa <= ${weeks[0]};
     `;
   } else {
     query = await sql`
       SELECT * FROM BASE;
-    `;
+    `
   }
 
   res.json(query);
@@ -67,6 +76,20 @@ app.get('/api/cierres', async (req, res) => {
   const query = await sql`
     SELECT * FROM CIERRES;
   `
+  res.json(query);
+});
+
+app.get('/api/empresas', async (req, res) => {
+  const query = await sql`
+    SELECT * FROM TIPO_EMPRESA;
+  `;
+  res.json(query);
+});
+
+app.get('/api/servicios', async (req, res) => {
+  const query = await sql`
+    SELECT * FROM TIPO_SERVICIO;
+  `;
   res.json(query);
 });
 

@@ -7,18 +7,27 @@
   <link rel="stylesheet" href="../css/graphs_style.css">
 </head>
 <body>
+  <h1>Leads, Propuestas y Cierres</h1>
   <!-- Implementar barra de filtrado, gráficos group por servicios -->
-  <div class="chartContainer">
-    <!-- Conteo Total Leads -->
-    <canvas class="barChart"></canvas>
+  <div class="row">
+    <div class="chartContainer">
+      <!-- Conteo Total Leads -->
+      <canvas class="barChart" id="leads-count"></canvas>
+    </div>
   </div>
-  <div class="chartContainer">
-    <!-- Conteo Total Propuestas -->
-    <canvas class="barChart"></canvas>
+  <div class="row">
+    <div class="chartContainer">
+      <!-- Conteo Total Propuestas -->
+      <canvas class="barChart" id="propuestas-count"></canvas>
+    </div>
   </div>
-  <div class="chartContainer">
-    <!-- Conteo Total Cierres -->
-    <canvas class="barChart"></canvas>
+  <div class="row">
+    <div class="chartContainer">
+      <!-- Conteo Total Cierres -->
+      <canvas class="barChart" id="cierres-count"></canvas>
+    </div>
   </div>
+
+  <script type="module" src="../js/LPCCount.js"></script>
 </body>
 </html>
