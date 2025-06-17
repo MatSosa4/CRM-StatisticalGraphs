@@ -1,23 +1,32 @@
 body {
   display: flex;
+  margin: 0 25px;
   flex-direction: column;
   background-color: white;
   height: 100vh;
 }
 
-canvas {
-  width: 100%;
+.smallWidth {
+  display: flex;
+  width: 85% !important;
   height: 100%;
 }
 
 .row {
   display: flex;
+  justify-content: space-between;
   flex: 1;
 }
 
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .chartContainer {
-  width: 100%;
-  height: 100%;
+  height: 80%;
+  position: relative;
   border-color: black;
   flex: 1;
 }

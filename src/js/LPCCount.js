@@ -35,6 +35,13 @@ getDataFromAPI('leads').then((res) => {
       }))
     },
     options: {
+      datasets: {
+        bar: {
+          barPercentage: 0.4
+        }
+      },
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           display: false
@@ -76,6 +83,13 @@ getDataFromAPI('propuestas').then((res) => {
       }))
     },
     options: {
+      datasets: {
+        bar: {
+          barPercentage: 0.4
+        }
+      },
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           display: false
@@ -117,6 +131,13 @@ getDataFromAPI('cierres').then((res) => {
       }))
     },
     options: {
+      datasets: {
+        bar: {
+          barPercentage: 0.4
+        }
+      },
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           display: false
@@ -124,7 +145,7 @@ getDataFromAPI('cierres').then((res) => {
       },
       scales: {
         x: {
-          stacked: true
+          stacked: true,
         },
         y: {
           stacked: true

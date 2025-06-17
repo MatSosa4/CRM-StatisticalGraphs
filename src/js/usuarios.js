@@ -46,6 +46,12 @@ function displayDynamicTable(value) {
         }))
       },
       options: {
+        datasets: {
+          bar: {
+            barPercentage: 0.65
+          }
+        },
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             display: false

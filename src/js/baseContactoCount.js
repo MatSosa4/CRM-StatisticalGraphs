@@ -37,6 +37,13 @@ getDataFromAPI('bases?estado=Base').then((res) => {
       }))
     },
     options: {
+      datasets: {
+        bar: {
+          barPercentage: 0.7
+        }
+      },
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           display: false
@@ -80,6 +87,13 @@ getDataFromAPI('bases?estado=Contacto').then((res) => {
       }))
     },
     options: {
+      datasets: {
+        bar: {
+          barPercentage: 0.7
+        }
+      },
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           display: false
@@ -123,6 +137,13 @@ getDataFromAPI('bases?estado=Inhabilitado').then((res) => {
       }))
     },
     options: {
+      datasets: {
+        bar: {
+          barPercentage: 0.6
+        }
+      },
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           display: false
