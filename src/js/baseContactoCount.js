@@ -47,6 +47,10 @@ getDataFromAPI('bases?estado=Base').then((res) => {
       plugins: {
         legend: {
           display: false
+        },
+        title: {
+          display: true,
+          text: "Conteo Total de Bases Activas"
         }
       },
       scales: {
@@ -97,6 +101,10 @@ getDataFromAPI('bases?estado=Contacto').then((res) => {
       plugins: {
         legend: {
           display: false
+        },
+        title: {
+          display: true,
+          text: "Conteo Total de Contactos Activos"
         }
       },
       scales: {
@@ -147,6 +155,10 @@ getDataFromAPI('bases?estado=Inhabilitado').then((res) => {
       plugins: {
         legend: {
           display: false
+        },
+        title: {
+          display: true,
+          text: "Conteo Total de Bases Inhabilitadas"
         }
       },
       scales: {

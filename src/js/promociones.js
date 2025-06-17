@@ -47,6 +47,10 @@ getDataFromAPI('promociones').then((res) => {
       plugins: {
         legend: {
           display: false
+        },
+        title: {
+          display: true,
+          text: "Conteo Semanal de Promociones por Servicio"
         }
       },
       scales: {
@@ -64,8 +68,9 @@ getDataFromAPI('promociones').then((res) => {
 getDataFromAPI('promociones').then((res) => {
   const data = {};
 
+  // data: { servicio1: { empresa1: [], empresa2: [] }, servicio2: { empresa1: [], empresa2: [] } }
   servicios.forEach(s => {
-    data[s] = {}
+    data[s] = {};
     empresas.forEach(e => {
       data[s][e] = Array(4).fill(0);
     });
@@ -104,6 +109,17 @@ console.log();
       plugins: {
         legend: {
           display: false
+        },
+        title: {
+          display: true,
+          text: "Conteo Semanal de Promociones (Tipo de Servicio & Tipo de Empresa)"
+        },
+        tooltip: {
+          callbacks: {
+            title: function(context) {
+              return context[0].dataset.stack;
+            } 
+          }
         }
       },
     }

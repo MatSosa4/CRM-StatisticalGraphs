@@ -45,6 +45,10 @@ getDataFromAPI('leads').then((res) => {
       plugins: {
         legend: {
           display: false
+        },
+        title: {
+          display: true,
+          text: "Conteo Total de Leads"
         }
       },
       scales: {
@@ -93,6 +97,10 @@ getDataFromAPI('propuestas').then((res) => {
       plugins: {
         legend: {
           display: false
+        },
+        title: {
+          display: true,
+          text: "Conteo Total de Propuestas"
         }
       },
       scales: {
@@ -141,6 +149,10 @@ getDataFromAPI('cierres').then((res) => {
       plugins: {
         legend: {
           display: false
+        },
+        title: {
+          display: true,
+          text: "Conteo Total de Cierres"
         }
       },
       scales: {

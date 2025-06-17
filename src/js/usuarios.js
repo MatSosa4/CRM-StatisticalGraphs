@@ -55,7 +55,11 @@ function displayDynamicTable(value) {
         plugins: {
           legend: {
             display: false
-          }
+          },
+        title: {
+          display: true,
+          text: `Conteo Semanal de ${String(value).charAt(0).toUpperCase() + String(value).slice(1)}`  // Capitalize
+        }
         },
         scales: {
           x: {
