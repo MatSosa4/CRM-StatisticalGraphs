@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import { getDataFromAPI } from "./main";
 import { getISOWeekNumber } from '../backend/utils';
-import { empresas } from './main';
+import { empresas, usuarios } from './main';
 
 const basesActivos = document.getElementById('base-activos');
 const contactosActivos = document.getElementById('contactos-activos');
@@ -11,37 +11,30 @@ const basesInhabilitadas = document.getElementById('base-inhabilitados');
 
 const weeks = getISOWeekNumber(moment(), 4);  // [22, 23, 24, 25]
 
-getDataFromAPI('bases?estado=Base').then((res) => {
+getDataFromAPI('bases?estado=Base&fecha=all').then((res) => {
   const data = {};
 
-  // { tipo: [] }
-  empresas.forEach(e => {
-    data[e] = Array(4).fill(0);  // [0, 0, 0, 0]
+  // { usuario: 0 }
+  usuarios.forEach(u => {
+    data[u] = 0;
   });
 
-  // Por cada row, revisar la fecha_modif y obtener su ISOWeek
-  // Restar ISOWeek menor a todos para index[]
+  // Por cada row, revisar el usuario
   res.forEach(row => {
-    const index = moment(row.fecha_modif).isoWeek() - weeks[0];  // 25 - 22 = 3
-    data[row.nombre_tipo][index]++
+    data[row.nombre_usuario]++
   });
 
   new Chart(basesActivos, {
-    type: 'bar',
+    type: 'pie',
     data: {
-      labels: weeks.map(week => "Semana " + week),
-      datasets: empresas.map(e => ({
-        label: e,
-        data: data[e],
+      labels: usuarios,
+      datasets: [{
+        label: 'Usuarios',
+        data: usuarios.map(u => data[u]),
         borderWidth: 1
-      }))
+      }]
     },
     options: {
-      datasets: {
-        bar: {
-          barPercentage: 0.7
-        }
-      },
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
@@ -51,16 +44,16 @@ getDataFromAPI('bases?estado=Base').then((res) => {
         title: {
           display: true,
           text: "Conteo Total de Bases Activas"
+        },
+        tooltip: {
+          callbacks: {
+            title: () => "Usuarios",
+            label: function(context) {
+              return `${context.label}: ${context.parsed}`;
+            }
+          }
         }
       },
-      scales: {
-        x: {
-          stacked: true
-        },
-        y: {
-          stacked: true
-        }
-      }
     }
   });
 });
@@ -68,34 +61,27 @@ getDataFromAPI('bases?estado=Base').then((res) => {
 getDataFromAPI('bases?estado=Contacto').then((res) => {
   const data = {};
 
-  // { tipo: [] }
-  empresas.forEach(e => {
-    data[e] = Array(4).fill(0);  // [0, 0, 0, 0]
+  // { usuario: 0 }
+  usuarios.forEach(u => {
+    data[u] = 0;
   });
 
-  // Por cada row, revisar la fecha_modif y obtener su ISOWeek
-  // Restar ISOWeek menor a todos para index[]
+  // Por cada row, revisar el usuario
   res.forEach(row => {
-    const index = moment(row.fecha_modif).isoWeek() - weeks[0];  // 25 - 22 = 3
-    data[row.nombre_tipo][index]++
+    data[row.nombre_usuario]++
   });
 
   new Chart(contactosActivos, {
-    type: 'bar',
+    type: 'pie',
     data: {
-      labels: weeks.map(week => "Semana " + week),
-      datasets: empresas.map(e => ({
-        label: e,
-        data: data[e],
+      labels: usuarios,
+      datasets: [{
+        label: 'Usuarios',
+        data: usuarios.map(u => data[u]),
         borderWidth: 1
-      }))
+      }]
     },
     options: {
-      datasets: {
-        bar: {
-          barPercentage: 0.7
-        }
-      },
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
@@ -105,16 +91,16 @@ getDataFromAPI('bases?estado=Contacto').then((res) => {
         title: {
           display: true,
           text: "Conteo Total de Contactos Activos"
+        },
+        tooltip: {
+          callbacks: {
+            title: () => "Usuarios",
+            label: function(context) {
+              return `${context.label}: ${context.parsed}`;
+            }
+          }
         }
       },
-      scales: {
-        x: {
-          stacked: true
-        },
-        y: {
-          stacked: true
-        }
-      }
     }
   });
 });

@@ -22,7 +22,8 @@ app.get('/api/bases', async (req, res) => {
   // fecha = 2025-06-15 YYYY-MM-DD
   const { estado, fecha } = req.query;
 
-  const weeks = fecha ? getISOWeekRange(moment(fecha), 4) : getISOWeekRange(moment(), 4);
+  let weeks = fecha ? getISOWeekRange(moment(fecha), 4) : getISOWeekRange(moment(), 4);
+
   let query;
 
   query = await sql`
@@ -30,8 +31,8 @@ app.get('/api/bases', async (req, res) => {
     JOIN USUARIOS u ON u.id_usuario = b.id_usuario
   WHERE 
     ${estado ? sql`estado_empresa = ${estado}` : sql`TRUE`} AND 
-    fecha_ultima_modif_empresa > ${weeks[weeks.length - 1]} AND 
-    fecha_ultima_modif_empresa <= ${weeks[0]};
+    ${fecha !== 'all' ? sql `fecha_ultima_modif_empresa > ${weeks[weeks.length - 1]} AND 
+    fecha_ultima_modif_empresa <= ${weeks[0]}` : sql`TRUE`}
   `;
 
   res.json(query);
