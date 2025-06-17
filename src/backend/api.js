@@ -48,8 +48,9 @@ app.get('/api/contactos', async (req, res) => {
 
 app.get('/api/promociones', async (req, res) => {
   const query = await sql`
-  SELECT p.*, p.fecha_modif_promocion AS fecha_modif, u.nombre_usuario, u.cedula_usuario FROM PROMOCIONES p
-    JOIN USUARIOS u ON u.id_usuario = p.id_usuario;
+  SELECT b.nombre_tipo AS tipo_empresa, p.*, p.fecha_modif_promocion AS fecha_modif, p.nombre_tipo AS tipo_servicio, u.nombre_usuario, u.cedula_usuario FROM PROMOCIONES p
+    JOIN USUARIOS u ON u.id_usuario = p.id_usuario
+    JOIN BASE b ON b.ruc_empresa = p.ruc_empresa;
   `
   res.json(query);
 });

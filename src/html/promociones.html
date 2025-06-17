@@ -8,13 +8,19 @@
 </head>
 <body>
   <h1>Promociones</h1>
-  <div class="chartContainer">
-    <!-- Promociones por Tipo de Empresa -->
-    <canvas class="barChart"></canvas>
+  <div class="row">
+    <div class="chartContainer center">
+      <!-- Promociones por Tipo de Empresa -->
+      <canvas class="barChart" id="promociones-servicios"></canvas>
+    </div>
   </div>
-  <div class="chartContainer">
-    <!-- Promociones por Tipo de Servicio -->
-    <canvas class="barChart"></canvas>
+  <div class="row">
+    <div class="chartContainer center">
+      <!-- Promociones por Tipo de Servicio -->
+      <canvas class="barChart" id="promociones-empresas-servicios"></canvas>
+    </div>
   </div>
+
+  <script type="module" src="../js/promociones.js"></script>
 </body>
 </html>

@@ -6,9 +6,8 @@ body {
   height: 100vh;
 }
 
-.smallWidth {
+canvas {
   display: flex;
-  width: 85% !important;
   height: 100%;
 }
 
