@@ -122,6 +122,8 @@ export async function getDataFromAPI(apiData) {
 // Empresas y Servicios accesibles
 export let empresas;
 export let servicios;
+export let usuarios;
 
 await getDataFromAPI('empresas').then((res) => empresas = res.map(r => r.nombre_tipo));
 await getDataFromAPI('servicios').then((res) => servicios = res.map(r => r.nombre_tipo));
+await getDataFromAPI('usuarios').then((res) => usuarios = res.map(u => u.nombre_usuario));

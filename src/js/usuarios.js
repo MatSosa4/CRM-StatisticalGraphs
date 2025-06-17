@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 
 import { getISOWeekNumber } from "../backend/utils";
 import { getDataFromAPI } from "./main";
+import { usuarios } from "./main";
 
 const usersChart = document.getElementById('users-chart');
 const selectTable = document.getElementById('select-table');
@@ -12,19 +13,12 @@ const data = {};
 
 const weeks = getISOWeekNumber(moment(), 4);
 
-const usersName = [];
-getDataFromAPI('usuarios').then((res) => {
-  res.forEach(row => {
-    usersName.push(row.nombre_usuario);
-  });
-});
-
 // Al cambiar el estado de un comboBox (Bases, Contactos, Promociones, Leads, Propuestas, Cierres)
 // se cambia la data del gráfico, rescatando diferentes datos pero siempre el conteo de usuarios por
 // semana.
 function displayDynamicTable(value) {
   getDataFromAPI(value).then((res) => {
-    usersName.forEach(name => {
+    usuarios.forEach(name => {
       data[name] = Array(4).fill(0);  // [0, 0, 0, 0]
     });
 
@@ -39,7 +33,7 @@ function displayDynamicTable(value) {
       type: 'bar',
       data: {
         labels: weeks.map(week => "Semana " + week),
-        datasets: usersName.map(name => ({
+        datasets: usuarios.map(name => ({
           label: name,
           data: data[name],
           borderWidth: 1
