@@ -2,7 +2,7 @@ import moment from "moment";
 import Chart from 'chart.js/auto';
 
 import { getISOWeekNumber } from "../backend/utils";
-import { getDataFromAPI } from "./main";
+import { getDataFromAPI, totalSum } from "./main";
 import { usuarios } from "./main";
 
 const usersChart = document.getElementById('users-chart');
@@ -53,6 +53,11 @@ function displayDynamicTable(value) {
         title: {
           display: true,
           text: `Conteo Semanal de ${String(value).charAt(0).toUpperCase() + String(value).slice(1)}`  // Capitalize
+        },
+        tooltip: {
+          callbacks: {
+            footer: totalSum
+          }
         }
         },
         scales: {

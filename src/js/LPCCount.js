@@ -1,7 +1,7 @@
 import moment from "moment";
 import Chart from 'chart.js/auto';
 
-import { getDataFromAPI } from "./main";
+import { getDataFromAPI, totalSum } from "./main";
 import { servicios } from "./main";
 import { getISOWeekNumber } from "../backend/utils";
 
@@ -11,12 +11,6 @@ const cierresCount = document.getElementById('cierres-count');
 
 const weeks = getISOWeekNumber(moment(), 4);  // [22, 23, 24, 25]
 
-function totalSum(tooltips) {
-  let sum = 0;
-
-  tooltips.forEach(t => sum += t.parsed.y);
-  return `Total: ${sum}`;
-}
 
 getDataFromAPI('leads').then((res) => {
   const data = {};
@@ -42,10 +36,6 @@ getDataFromAPI('leads').then((res) => {
       }))
     },
     options: {
-      interaction: {
-        intersect: false,
-        mode: 'index',
-      },
       datasets: {
         bar: {
           barPercentage: 0.4
@@ -103,10 +93,6 @@ getDataFromAPI('propuestas').then((res) => {
       }))
     },
     options: {
-      interaction: {
-        intersect: false,
-        mode: 'index',
-      },
       datasets: {
         bar: {
           barPercentage: 0.4
@@ -164,10 +150,6 @@ getDataFromAPI('cierres').then((res) => {
       }))
     },
     options: {
-      interaction: {
-        intersect: false,
-        mode: 'index',
-      },
       datasets: {
         bar: {
           barPercentage: 0.4

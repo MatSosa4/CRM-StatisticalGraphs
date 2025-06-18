@@ -2,7 +2,7 @@ import Chart from 'chart.js/auto';
 import moment from 'moment';
 
 import { getISOWeekNumber } from '../backend/utils';
-import { servicios, empresas } from './main';
+import { servicios, empresas, totalSum } from './main';
 import { getDataFromAPI } from './main';
 
 const chartServicios = document.getElementById('promociones-servicios');
@@ -51,6 +51,11 @@ getDataFromAPI('promociones').then((res) => {
         title: {
           display: true,
           text: "Conteo Semanal de Promociones por Servicio"
+        },
+        tooltip: {
+          callbacks: {
+            footer: totalSum
+          }
         }
       },
       scales: {
@@ -118,7 +123,8 @@ console.log();
           callbacks: {
             title: function(context) {
               return context[0].dataset.stack;
-            } 
+            },
+            footer: totalSum
           }
         }
       },

@@ -1,7 +1,7 @@
 import Chart from 'chart.js/auto';
 import moment from 'moment';
 
-import { getDataFromAPI } from "./main";
+import { getDataFromAPI, totalSum } from "./main";
 import { getISOWeekNumber } from '../backend/utils';
 import { empresas, usuarios } from './main';
 
@@ -145,6 +145,11 @@ getDataFromAPI('bases?estado=Inhabilitado').then((res) => {
         title: {
           display: true,
           text: "Conteo Total de Bases Inhabilitadas"
+        },
+        tooltip: {
+          callbacks: {
+            footer: totalSum
+          }
         }
       },
       scales: {

@@ -119,6 +119,13 @@ export async function getDataFromAPI(apiData) {
   return await res.json();
 }
 
+export function totalSum(tooltips) {
+  let sum = 0;
+
+  tooltips.forEach(t => sum += t.parsed.y);
+  return `Total: ${sum}`;
+}
+
 // Empresas y Servicios accesibles
 export let empresas;
 export let servicios;
