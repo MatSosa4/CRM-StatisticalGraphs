@@ -17,6 +17,8 @@ const weeks = getISOWeekNumber(moment(), 4);
 // se cambia la data del gráfico, rescatando diferentes datos pero siempre el conteo de usuarios por
 // semana.
 function displayDynamicTable(value) {
+  const tableName = String(value).charAt(0).toUpperCase() + String(value).slice(1).split('?')[0];  // bases?param=value
+
   getDataFromAPI(value).then((res) => {
     usuarios.forEach(name => {
       data[name] = Array(4).fill(0);  // [0, 0, 0, 0]
@@ -52,7 +54,7 @@ function displayDynamicTable(value) {
           },
         title: {
           display: true,
-          text: `Conteo Semanal de ${String(value).charAt(0).toUpperCase() + String(value).slice(1)}`  // Capitalize
+          text: `Conteo Semanal de ${tableName}`  // Capitalize
         },
         tooltip: {
           callbacks: {

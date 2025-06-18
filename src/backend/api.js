@@ -43,7 +43,7 @@ app.get('/api/bases', async (req, res) => {
 });
 
 app.get('/api/contactos', async (req, res) => {
-  const { fecha,  } = req.query;
+  const { fecha, ingreso } = req.query;
   const weeks = fecha ? getISOWeekRange(moment(fecha), 4) : getISOWeekRange(moment(), 4);
 
   const query = await sql`
