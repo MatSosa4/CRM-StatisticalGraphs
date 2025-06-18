@@ -144,7 +144,7 @@ getDataFromAPI('bases?estado=Inhabilitado').then((res) => {
         },
         title: {
           display: true,
-          text: "Conteo Total de Bases Inhabilitadas"
+          text: "Conteo Semanal de Bases Inhabilitadas"
         },
         tooltip: {
           callbacks: {

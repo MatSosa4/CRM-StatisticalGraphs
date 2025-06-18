@@ -49,7 +49,7 @@ getDataFromAPI('leads').then((res) => {
         },
         title: {
           display: true,
-          text: "Conteo Total de Leads"
+          text: "Conteo Semanal de Leads"
         },
         tooltip: {
           callbacks: {
@@ -106,7 +106,7 @@ getDataFromAPI('propuestas').then((res) => {
         },
         title: {
           display: true,
-          text: "Conteo Total de Propuestas"
+          text: "Conteo Semanal de Propuestas"
         },
         tooltip: {
           callbacks: {
@@ -163,7 +163,7 @@ getDataFromAPI('cierres').then((res) => {
         },
         title: {
           display: true,
-          text: "Conteo Total de Cierres"
+          text: "Conteo Semanal de Cierres"
         },
         tooltip: {
           callbacks: {
