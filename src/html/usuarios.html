@@ -27,12 +27,19 @@
     </select>
     <button id="reload">Recargar</button>
   </div>
-  <!-- https://www.chartjs.org/docs/latest/ -->
-  <!-- Implementar barra de filtrado -->
-  <div class="row center">
-    <div class="center chartContainer">
-      <!-- Gráfico cambiante dependiendo de la barra de filtrado -->
-      <canvas class="barChart" id="users-chart"></canvas>
+  <div id="content">
+    <!-- https://www.chartjs.org/docs/latest/ -->
+    <!-- Implementar barra de filtrado -->
+    <div class="row center">
+      <div class="center chartContainer">
+        <!-- Gráfico cambiante dependiendo de la barra de filtrado -->
+        <canvas class="barChart" id="users-chart"></canvas>
+      </div>
+    </div>
+    <div class="row center">
+      <div class="center chartContainer">
+        <canvas class="barChart" id="states-chart"></canvas>
+      </div>
     </div>
   </div>
 

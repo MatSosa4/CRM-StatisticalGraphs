@@ -1,17 +1,17 @@
 import moment from "moment";
 import Chart from 'chart.js/auto';
 
-import { getISOWeekNumber } from "../backend/utils";
-import { getDataFromAPI } from "./main";
+import { getApiCall, getDataFromAPI, getWeeks, empresas } from "./main";
 import { usuarios } from "./main";
 
 const usersChart = document.getElementById('users-chart');
+const statesChart = document.getElementById('states-chart');
+
 const selectTable = document.getElementById('select-table');
 const datePicker = document.getElementById('date-picker');
 
-let currentCanvas = null;
-
-const data = {};
+let canvas1 = null;
+let canvas2 = null;
 
 let weeks;
 
@@ -20,10 +20,13 @@ let weeks;
 // semana.
 function displayDynamicTable(value) {
   const tableName = String(value).charAt(0).toUpperCase() + String(value).slice(1).split('?')[0];  // bases?param=value
-  let apiCall = `${value}${value.includes('?') ? '&' : '?'}fecha=${datePicker.value}`;  // string
-  weeks = getISOWeekNumber(datePicker.value ? moment(datePicker.value) : moment(), 4);
+  weeks = getWeeks(datePicker.value);
 
-  getDataFromAPI(apiCall).then((res) => {
+  if (canvas1) canvas1.destroy();  // Remove actual data
+  if (canvas2) canvas2.destroy();  // Remove actual data
+
+  getDataFromAPI(getApiCall(value, datePicker)).then((res) => {
+    const data = {};
 
     usuarios.forEach(name => {
       data[name] = Array(4).fill(0);  // [0, 0, 0, 0]
@@ -36,9 +39,7 @@ function displayDynamicTable(value) {
       data.total[index]++;
     });
 
-    if (currentCanvas) currentCanvas.destroy();  // Remove actual data
-
-    currentCanvas = new Chart(usersChart, {
+    canvas1 = new Chart(usersChart, {
       type: 'bar',
       data: {
         labels: weeks.map(week => "Semana " + week),
@@ -62,6 +63,71 @@ function displayDynamicTable(value) {
         title: {
           display: true,
           text: `Conteo Semanal de ${tableName}`  // Capitalize
+        },
+        tooltip: {
+          callbacks: {
+            footer: function(tooltips) {
+              return `Total: ${data.total[tooltips[0].parsed.x]}`;
+            }
+          }
+        }
+        },
+        scales: {
+          x: {
+            stacked: true
+          },
+          y: {
+            stacked: true
+          }
+        }
+      }
+    });
+  });
+
+  // States
+  getDataFromAPI(getApiCall(value, datePicker)).then((res) => {
+    const data = {};
+    data.total = Array(4).fill(0);
+
+    res.forEach(row => {
+      const index = moment(row.fecha_modif).isoWeek() - weeks[0];  // 25 - 22 = 3
+
+      // Dynamic Values
+      if (!row.estado) row.estado = 'No definido';
+      if (!data.hasOwnProperty(row.estado)) data[row.estado] = Array(4).fill(0);
+
+      data[row.estado][index]++;
+      data.total[index]++;
+    });
+
+    const states = Object.keys(data);  // No 'total' in states
+    states.splice(states.indexOf('total'), 1)
+
+    // Estados
+    canvas2 = new Chart(statesChart, {
+      type: 'bar',
+      data: {
+        labels: weeks.map(week => "Semana " + week),
+        datasets: states.map(name => ({
+          label: name,
+          data: data[name],
+          borderWidth: 1
+        }))
+      },
+      options: {
+        datasets: {
+          bar: {
+            barPercentage: 0.65
+          }
+        },
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+        title: {
+          display: true,
+          text: `Conteo Semanal de Estados de ${tableName}`  // Capitalize
         },
         tooltip: {
           callbacks: {
