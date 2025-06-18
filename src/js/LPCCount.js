@@ -11,6 +11,13 @@ const cierresCount = document.getElementById('cierres-count');
 
 const weeks = getISOWeekNumber(moment(), 4);  // [22, 23, 24, 25]
 
+function totalSum(tooltips) {
+  let sum = 0;
+
+  tooltips.forEach(t => sum += t.parsed.y);
+  return `Total: ${sum}`;
+}
+
 getDataFromAPI('leads').then((res) => {
   const data = {};
 
@@ -35,6 +42,10 @@ getDataFromAPI('leads').then((res) => {
       }))
     },
     options: {
+      interaction: {
+        intersect: false,
+        mode: 'index',
+      },
       datasets: {
         bar: {
           barPercentage: 0.4
@@ -49,6 +60,11 @@ getDataFromAPI('leads').then((res) => {
         title: {
           display: true,
           text: "Conteo Total de Leads"
+        },
+        tooltip: {
+          callbacks: {
+            footer: totalSum
+          }
         }
       },
       scales: {
@@ -87,6 +103,10 @@ getDataFromAPI('propuestas').then((res) => {
       }))
     },
     options: {
+      interaction: {
+        intersect: false,
+        mode: 'index',
+      },
       datasets: {
         bar: {
           barPercentage: 0.4
@@ -101,6 +121,11 @@ getDataFromAPI('propuestas').then((res) => {
         title: {
           display: true,
           text: "Conteo Total de Propuestas"
+        },
+        tooltip: {
+          callbacks: {
+            footer: totalSum
+          }
         }
       },
       scales: {
@@ -139,6 +164,10 @@ getDataFromAPI('cierres').then((res) => {
       }))
     },
     options: {
+      interaction: {
+        intersect: false,
+        mode: 'index',
+      },
       datasets: {
         bar: {
           barPercentage: 0.4
@@ -153,6 +182,11 @@ getDataFromAPI('cierres').then((res) => {
         title: {
           display: true,
           text: "Conteo Total de Cierres"
+        },
+        tooltip: {
+          callbacks: {
+            footer: totalSum
+          }
         }
       },
       scales: {

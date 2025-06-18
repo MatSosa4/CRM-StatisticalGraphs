@@ -27,7 +27,7 @@ function displayDynamicTable(value) {
       data[row.nombre_usuario][index]++
     });
 
-    if (currentCanvas) currentCanvas.destroy(); 
+    if (currentCanvas) currentCanvas.destroy();  // Remove actual data
 
     currentCanvas = new Chart(usersChart, {
       type: 'bar',
