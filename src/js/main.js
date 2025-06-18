@@ -104,6 +104,9 @@
 //   }
 // });
 
+import { getISOWeekNumber } from "../backend/utils";
+import moment from "moment";
+
 // API Variables
 const host = 'localhost';
 const port = '8081';
@@ -124,6 +127,14 @@ export function totalSum(tooltips) {
 
   tooltips.forEach(t => sum += t.parsed.y);
   return `Total: ${sum}`;
+}
+
+export function getWeeks(dateValue) {
+  return getISOWeekNumber(dateValue ? moment(dateValue) : moment(), 4);
+}
+
+export function getApiCall(value, datePicker) {
+  return `${value}${value.includes('?') ? '&' : '?'}fecha=${datePicker.value}`
 }
 
 // Empresas y Servicios accesibles

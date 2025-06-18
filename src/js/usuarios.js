@@ -7,19 +7,24 @@ import { usuarios } from "./main";
 
 const usersChart = document.getElementById('users-chart');
 const selectTable = document.getElementById('select-table');
+const datePicker = document.getElementById('date-picker');
+
 let currentCanvas = null;
 
 const data = {};
 
-const weeks = getISOWeekNumber(moment(), 4);
+let weeks;
 
 // Al cambiar el estado de un comboBox (Bases, Contactos, Promociones, Leads, Propuestas, Cierres)
 // se cambia la data del gráfico, rescatando diferentes datos pero siempre el conteo de usuarios por
 // semana.
 function displayDynamicTable(value) {
   const tableName = String(value).charAt(0).toUpperCase() + String(value).slice(1).split('?')[0];  // bases?param=value
+  let apiCall = `${value}${value.includes('?') ? '&' : '?'}fecha=${datePicker.value}`;  // string
+  weeks = getISOWeekNumber(datePicker.value ? moment(datePicker.value) : moment(), 4);
 
-  getDataFromAPI(value).then((res) => {
+  getDataFromAPI(apiCall).then((res) => {
+
     usuarios.forEach(name => {
       data[name] = Array(4).fill(0);  // [0, 0, 0, 0]
     });
@@ -81,6 +86,8 @@ function displayDynamicTable(value) {
 
 displayDynamicTable(selectTable.value);  // Empieza siempre en Base
 
-selectTable.addEventListener('change', () => {
-  displayDynamicTable(selectTable.value);
-});
+// When modified
+selectTable.addEventListener('change', () => displayDynamicTable(selectTable.value));
+
+document.getElementById('reload').addEventListener('click', () => displayDynamicTable(selectTable.value));
+datePicker.addEventListener('change', () => displayDynamicTable(selectTable.value));

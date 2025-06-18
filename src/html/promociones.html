@@ -5,19 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Usuarios</title>
   <link rel="stylesheet" href="../css/graphs_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <h1>Promociones</h1>
-  <div class="row">
-    <div class="chartContainer center">
-      <!-- Promociones por Tipo de Empresa -->
-      <canvas class="barChart" id="promociones-servicios"></canvas>
+  <h2>
+    <i class="fas fa-gift" style="margin-right: 8px;"></i>
+    Promociones
+  </h2>
+    <div id="header">
+    <div id="filters">
+      <input type="date" name="date-picker" id="date-picker" value="">
+      <button id="search-date">Buscar</button>
     </div>
+    <button id="reload">Recargar</button>
   </div>
-  <div class="row">
-    <div class="chartContainer center">
-      <!-- Promociones por Tipo de Servicio -->
-      <canvas class="barChart" id="promociones-empresas-servicios"></canvas>
+  <div id="content">
+    <div class="row">
+      <div class="chartContainer center">
+        <!-- Promociones por Tipo de Empresa -->
+        <canvas class="barChart" id="promociones-servicios"></canvas>
+      </div>
+    </div>
+    <div class="row">
+      <div class="chartContainer center">
+        <!-- Promociones por Tipo de Servicio -->
+        <canvas class="barChart" id="promociones-empresas-servicios"></canvas>
+      </div>
     </div>
   </div>
 

@@ -5,17 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Usuarios</title>
   <link rel="stylesheet" href="../css/graphs_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <h1>Usuarios</h1>
-  <select name="select-table" id="select-table">
-    <option value="bases?ingreso=true">Base</option>
-    <option value="contactos?ingreso=true">Contactos</option>
-    <option value="promociones">Promociones</option>
-    <option value="leads">Leads</option>
-    <option value="propuestas">Propuestas</option>
-    <option value="cierres">Cierres</option>
-  </select>
+  <h2>
+    <i class="fas fa-user" style="margin-right: 8px;"></i>
+    Usuarios
+  </h2>
+  <div id="header">
+    <div id="filters">
+      <input type="date" name="date-picker" id="date-picker" value="">
+      <button id="search-date">Buscar</button>
+    </div>
+    <select name="select-table" id="select-table">
+      <option value="bases?ingreso=true">Base</option>
+      <option value="contactos?ingreso=true">Contactos</option>
+      <option value="promociones">Promociones</option>
+      <option value="leads">Leads</option>
+      <option value="propuestas">Propuestas</option>
+      <option value="cierres">Cierres</option>
+    </select>
+    <button id="reload">Recargar</button>
+  </div>
   <!-- https://www.chartjs.org/docs/latest/ -->
   <!-- Implementar barra de filtrado -->
   <div class="row center">

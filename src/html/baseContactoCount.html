@@ -5,24 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Usuarios</title>
   <link rel="stylesheet" href="../css/graphs_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <h1>Base/Contactos</h1>
-  <!-- Implementar barra de filtrado -->
-  <div class="row center">
-    <div class="chartContainer center">
-      <!-- Total de Base Activos -->
-      <canvas class="smallWidth" id="base-activos"></canvas>
+  <h2>
+    <i class="fas fa-address-book" style="margin-right: 8px;"></i>
+    Base/Contactos
+  </h2>
+  <div id="header">
+    <div id="filters">
+      <input type="date" name="date-picker" id="date-picker" value="">
+      <button id="search-date">Buscar</button>
     </div>
-    <div class="chartContainer center">
-      <!-- Total de Contactos Activos -->
-      <canvas class="smallWidth" id="contactos-activos"></canvas>
-    </div>
+    <button id="reload">Recargar</button>
   </div>
-  <div class="row center">
-    <div class="chartContainer center">
-      <!-- Total de Bases Inhabilitadas -->
-      <canvas class="barChart" id="base-inhabilitados"></canvas>
+  <div id="content">
+  <!-- Implementar barra de filtrado -->
+    <div class="row center">
+      <div class="chartContainer center">
+        <!-- Total de Base Activos -->
+        <canvas class="smallWidth" id="base-activos"></canvas>
+      </div>
+      <div class="chartContainer center">
+        <!-- Total de Contactos Activos -->
+        <canvas class="smallWidth" id="contactos-activos"></canvas>
+      </div>
+    </div>
+    <div class="row center">
+      <div class="chartContainer center">
+        <!-- Total de Bases Inhabilitadas -->
+        <canvas class="barChart" id="base-inhabilitados"></canvas>
+      </div>
     </div>
   </div>
 

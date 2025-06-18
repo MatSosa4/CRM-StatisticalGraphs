@@ -1,9 +1,15 @@
+@font-face {
+  font-family: "Monserrat";
+  src: url('../../public/montserrat_font/Montserrat-Regular.ttf');
+}
+
 body {
   display: flex;
   margin: 0 25px;
   flex-direction: column;
   background-color: white;
   height: 100vh;
+  font-family: "Monserrat";
 }
 
 canvas {
@@ -15,6 +21,25 @@ canvas {
   display: flex;
   justify-content: space-between;
   flex: 1;
+}
+
+#filters {
+  width: 15%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#header {
+  display: flex;
+  justify-content: space-around;
+}
+
+#content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1
 }
 
 .center {
