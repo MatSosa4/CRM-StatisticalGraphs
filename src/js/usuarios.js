@@ -100,8 +100,8 @@ function displayDynamicTable(value) {
       data.total[index]++;
     });
 
-    const states = Object.keys(data);  // No 'total' in states
-    states.splice(states.indexOf('total'), 1)
+    const states = Object.keys(data);
+    states.splice(states.indexOf('total'), 1)  // No 'total' in states
 
     // Estados
     canvas2 = new Chart(statesChart, {
@@ -155,5 +155,6 @@ displayDynamicTable(selectTable.value);  // Empieza siempre en Base
 // When modified
 selectTable.addEventListener('change', () => displayDynamicTable(selectTable.value));
 
+document.getElementById('search-date').addEventListener('click', () => displayDynamicTable(selectTable.value));
 document.getElementById('reload').addEventListener('click', () => displayDynamicTable(selectTable.value));
 datePicker.addEventListener('change', () => displayDynamicTable(selectTable.value));

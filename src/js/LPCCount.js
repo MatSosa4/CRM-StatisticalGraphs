@@ -209,4 +209,5 @@ function displayDynamicTable() {
 displayDynamicTable();
 
 document.getElementById('reload').addEventListener('click', () => displayDynamicTable());
+document.getElementById('search-date').addEventListener('click', () => displayDynamicTable());
 datePicker.addEventListener('change', () => displayDynamicTable());

@@ -122,13 +122,6 @@ export async function getDataFromAPI(apiData) {
   return await res.json();
 }
 
-export function totalSum(tooltips) {
-  let sum = 0;
-
-  tooltips.forEach(t => sum += t.parsed.y);
-  return `Total: ${sum}`;
-}
-
 export function getWeeks(dateValue) {
   return getISOWeekNumber(dateValue ? moment(dateValue) : moment(), 4);
 }
