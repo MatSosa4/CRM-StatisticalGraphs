@@ -2,7 +2,7 @@ import Chart from 'chart.js/auto';
 import moment from 'moment';
 
 import { getISOWeekNumber } from '../backend/utils';
-import { servicios, empresas, totalSum } from './main';
+import { servicios, empresas } from './main';
 import { getDataFromAPI } from './main';
 
 const chartServicios = document.getElementById('promociones-servicios');
@@ -18,12 +18,14 @@ getDataFromAPI('promociones').then((res) => {
   servicios.forEach(e => {
     data[e] = Array(4).fill(0);  // [0, 0, 0, 0]
   });
+  data.total = Array(4).fill(0);
 
   // Por cada row, revisar la fecha_modif y obtener su ISOWeek
   // Restar ISOWeek menor a todos para index[]
   res.forEach(row => {
     const index = moment(row.fecha_modif).isoWeek() - weeks[0];  // 25 - 22 = 3
-    data[row.tipo_servicio][index]++
+    data[row.tipo_servicio][index]++;
+    data.total[index]++;
   });
 
   new Chart(chartServicios, {
@@ -54,7 +56,9 @@ getDataFromAPI('promociones').then((res) => {
         },
         tooltip: {
           callbacks: {
-            footer: totalSum
+            footer: function(tooltips) {
+              return `Total: ${data.total[tooltips[0].parsed.x]}`;
+            }
           }
         }
       },
@@ -79,11 +83,13 @@ getDataFromAPI('promociones').then((res) => {
     empresas.forEach(e => {
       data[s][e] = Array(4).fill(0);
     });
+    data[s].total = Array(4).fill(0);
   });
 
   res.forEach(row => {
     const index = moment(row.fecha_modif).isoWeek() - weeks[0];  // 25 - 22 = 3
     data[row.tipo_servicio][row.tipo_empresa][index]++
+    data[row.tipo_servicio].total[index]++
   });
 
 console.log();
@@ -124,7 +130,10 @@ console.log();
             title: function(context) {
               return context[0].dataset.stack;
             },
-            footer: totalSum
+            footer: function(tooltips) {
+              console.log(tooltips);
+              return `Total: ${data[tooltips[0].dataset.stack].total[tooltips[0].parsed.x]}`;  // Stack = Servicio
+            }
           }
         }
       },

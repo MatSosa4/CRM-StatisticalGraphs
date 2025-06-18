@@ -2,7 +2,7 @@ import moment from "moment";
 import Chart from 'chart.js/auto';
 
 import { getISOWeekNumber } from "../backend/utils";
-import { getDataFromAPI, totalSum } from "./main";
+import { getDataFromAPI } from "./main";
 import { usuarios } from "./main";
 
 const usersChart = document.getElementById('users-chart');
@@ -23,10 +23,12 @@ function displayDynamicTable(value) {
     usuarios.forEach(name => {
       data[name] = Array(4).fill(0);  // [0, 0, 0, 0]
     });
+    data.total = Array(4).fill(0);  // Save Total in Array
 
     res.forEach(row => {
       const index = moment(row.fecha_modif).isoWeek() - weeks[0];  // 25 - 22 = 3
       data[row.nombre_usuario][index]++
+      data.total[index]++;
     });
 
     if (currentCanvas) currentCanvas.destroy();  // Remove actual data
@@ -58,7 +60,9 @@ function displayDynamicTable(value) {
         },
         tooltip: {
           callbacks: {
-            footer: totalSum
+            footer: function(tooltips) {
+              return `Total: ${data.total[tooltips[0].parsed.x]}`;
+            }
           }
         }
         },

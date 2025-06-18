@@ -19,10 +19,12 @@ getDataFromAPI('leads').then((res) => {
   servicios.forEach(s => {
     data[s] = Array(4).fill(0);  // [0, 0, 0, 0]
   });
+  data.total = Array(4).fill(0);
 
   res.forEach(row => {
     const index = moment(row.fecha_modif_lead).isoWeek() - weeks[0];  // 25 - 22 = 3
-    data[row.nombre_tipo][index]++
+    data[row.nombre_tipo][index]++;
+    data.total[index]++;
   });
 
   new Chart(leadsCount, {
@@ -53,7 +55,9 @@ getDataFromAPI('leads').then((res) => {
         },
         tooltip: {
           callbacks: {
-            footer: totalSum
+            footer: function(tooltips) {
+              return `Total: ${data.total[tooltips[0].parsed.x]}`;
+            }
           }
         }
       },
@@ -76,10 +80,12 @@ getDataFromAPI('propuestas').then((res) => {
   servicios.forEach(s => {
     data[s] = Array(4).fill(0);  // [0, 0, 0, 0]
   });
+  data.total = Array(4).fill(0);
 
   res.forEach(row => {
     const index = moment(row.fecha_modif_propuesta).isoWeek() - weeks[0];  // 25 - 22 = 3
-    data[row.nombre_tipo][index]++
+    data[row.nombre_tipo][index]++;
+    data.total[index]++;
   });
 
   new Chart(propuestasCount, {
@@ -110,7 +116,9 @@ getDataFromAPI('propuestas').then((res) => {
         },
         tooltip: {
           callbacks: {
-            footer: totalSum
+            footer: function(tooltips) {
+              return `Total: ${data.total[tooltips[0].parsed.x]}`;
+            }
           }
         }
       },
@@ -133,10 +141,12 @@ getDataFromAPI('cierres').then((res) => {
   servicios.forEach(s => {
     data[s] = Array(4).fill(0);  // [0, 0, 0, 0]
   });
+  data.total = Array(4).fill(0);
 
   res.forEach(row => {
     const index = moment(row.firma_contrato_cierre).isoWeek() - weeks[0];  // 25 - 22 = 3
-    data[row.nombre_tipo][index]++
+    data[row.nombre_tipo][index]++;
+    data.total[index]++;
   });
 
   new Chart(cierresCount, {
@@ -167,7 +177,9 @@ getDataFromAPI('cierres').then((res) => {
         },
         tooltip: {
           callbacks: {
-            footer: totalSum
+            footer: function(tooltips) {
+              return `Total: ${data.total[tooltips[0].parsed.x]}`;
+            }
           }
         }
       },

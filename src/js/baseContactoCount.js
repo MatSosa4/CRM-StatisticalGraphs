@@ -112,12 +112,14 @@ getDataFromAPI('bases?estado=Inhabilitado').then((res) => {
   empresas.forEach(e => {
     data[e] = Array(4).fill(0);  // [0, 0, 0, 0]
   });
+  data.total = Array(4).fill(0);
 
   // Por cada row, revisar la fecha_modif y obtener su ISOWeek
   // Restar ISOWeek menor a todos para index[]
   res.forEach(row => {
     const index = moment(row.fecha_modif).isoWeek() - weeks[0];  // 25 - 22 = 3
-    data[row.nombre_tipo][index]++
+    data[row.nombre_tipo][index]++;
+    data.total[index]++;
   });
 
   new Chart(basesInhabilitadas, {
@@ -148,7 +150,9 @@ getDataFromAPI('bases?estado=Inhabilitado').then((res) => {
         },
         tooltip: {
           callbacks: {
-            footer: totalSum
+            footer: function(tooltips) {
+              return `Total: ${data.total[tooltips[0].parsed.x]}`;
+            }
           }
         }
       },
