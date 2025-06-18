@@ -1,6 +1,12 @@
+@font-face {
+  font-family: "Monserrat";
+  src: url('../../public/montserrat_font/Montserrat-Regular.ttf');
+}
+
 body {
   display: flex;
   margin: 0;
+  font-family: "Monserrat";
 }
 
 a {
@@ -12,22 +18,42 @@ a {
   display: flex;
   flex-direction: column;
   width: 15%;
-  min-width: 200px;
+  min-width: 250px;
   height: 100vh;
-  background-color: blue;
+  background-color: rgb(29, 112, 184);
+  align-items: center;
+}
+
+#business-logo {
+  width: 75%;
+  min-width: 175px;
+  padding: 10px 0;
+}
+
+/* div containing the buttons */
+.btnMenu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .menu_btn {
   display: flex;
-  background-color: rgba(0, 0, 0, 0.1);
+  /* background-color: rgba(0, 0, 0, 0.1); */
   height: 35px;
   width: 100%;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
+  font-size: 14px;
+  padding: 0 15px;
+}
+
+.menu_btn i {
+  font-size: 18px;
 }
 
 .menu_btn:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgb(169, 169, 169);
 }
 
 #graphsWindow {

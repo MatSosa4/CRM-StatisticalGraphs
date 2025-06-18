@@ -5,13 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gráficos</title>
   <link rel="stylesheet" href="./src/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
   <div id="menu">
-    <a class="menu_btn" href="./src/html/usuarios.html" target="graphsWindow">Usuarios</a>
-    <a class="menu_btn" href="./src/html/baseContactoCount.html" target="graphsWindow">Base/Contactos</a>
-    <a class="menu_btn" href="./src/html/promociones.html" target="graphsWindow">Promociones</a>
-    <a class="menu_btn" href="./src/html/LPCCount.html" target="graphsWindow">Leads, Propuestas y Cierres</a>
+    <img id="business-logo" src="./public/BUSINESS_logo.png" alt="Business Plus Logo">
+    <div class="btnMenu">
+      <a class="menu_btn" href="./src/html/usuarios.html" target="graphsWindow">
+        <i class="fas fa-user" style="margin-right: 8px;"></i>
+        Usuarios
+      </a>
+      <a class="menu_btn" href="./src/html/baseContactoCount.html" target="graphsWindow">
+        <i class="fas fa-address-book" style="margin-right: 8px;"></i>
+        Base/Contactos
+      </a>
+      <a class="menu_btn" href="./src/html/promociones.html" target="graphsWindow">
+        <i class="fas fa-gift" style="margin-right: 8px;"></i>
+        Promociones
+      </a>
+      <a class="menu_btn" href="./src/html/LPCCount.html" target="graphsWindow">
+        <i class="fas fa-tasks" style="margin-right: 8px;"></i>
+        Leads, Propuestas y Cierres
+      </a>
+    </div>
   </div>
   <iframe id="graphsWindow" name="graphsWindow" src="./src/html/usuarios.html" frameborder="0">Hola</iframe>
 </body>
