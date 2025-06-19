@@ -28,10 +28,12 @@ function displayDynamicTable() {
     empresas.forEach(e => {
       data[e] = 0;
     });
+    data.total = 0;
 
     // Por cada row, revisar el usuario
     res.forEach(row => {
-      data[row.nombre_tipo]++
+      data[row.nombre_tipo]++;
+      data.total++;
     });
 
     canvas1 = new Chart(basesActivos, {
@@ -60,7 +62,8 @@ function displayDynamicTable() {
               title: () => "Empresas",
               label: function(context) {
                 return `${context.label}: ${context.parsed}`;
-              }
+              },
+              footer: () => `Total: ${data.total}`
             }
           }
         },
@@ -75,10 +78,12 @@ function displayDynamicTable() {
     empresas.forEach(u => {
       data[u] = 0;
     });
+    data.total = 0;
 
     // Por cada row, revisar el usuario
     res.forEach(row => {
       data[row.nombre_tipo]++
+      data.total++;
     });
 
     canvas2 = new Chart(contactosActivos, {
@@ -107,7 +112,8 @@ function displayDynamicTable() {
               title: () => "Usuarios",
               label: function(context) {
                 return `${context.label}: ${context.parsed}`;
-              }
+              },
+              footer: () => `Total: ${data.total}`
             }
           }
         },
