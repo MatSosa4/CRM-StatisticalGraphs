@@ -25,22 +25,22 @@ function displayDynamicTable() {
     const data = {};
 
     // { usuario: 0 }
-    usuarios.forEach(u => {
-      data[u] = 0;
+    empresas.forEach(e => {
+      data[e] = 0;
     });
 
     // Por cada row, revisar el usuario
     res.forEach(row => {
-      data[row.nombre_usuario]++
+      data[row.nombre_tipo]++
     });
 
     canvas1 = new Chart(basesActivos, {
       type: 'pie',
       data: {
-        labels: usuarios,
+        labels: empresas,
         datasets: [{
-          label: 'Usuarios',
-          data: usuarios.map(u => data[u]),
+          label: "Empresas",
+          data: empresas.map(e => data[e]),
           borderWidth: 1
         }]
       },
@@ -57,7 +57,7 @@ function displayDynamicTable() {
           },
           tooltip: {
             callbacks: {
-              title: () => "Usuarios",
+              title: () => "Empresas",
               label: function(context) {
                 return `${context.label}: ${context.parsed}`;
               }
@@ -71,23 +71,23 @@ function displayDynamicTable() {
   getDataFromAPI('bases?estado=Contacto&fecha=all').then((res) => {
     const data = {};
 
-    // { usuario: 0 }
-    usuarios.forEach(u => {
+    // { tipo_empresa: 0 }
+    empresas.forEach(u => {
       data[u] = 0;
     });
 
     // Por cada row, revisar el usuario
     res.forEach(row => {
-      data[row.nombre_usuario]++
+      data[row.nombre_tipo]++
     });
 
     canvas2 = new Chart(contactosActivos, {
       type: 'pie',
       data: {
-        labels: usuarios,
+        labels: empresas,
         datasets: [{
-          label: 'Usuarios',
-          data: usuarios.map(u => data[u]),
+          label: "Empresas",
+          data: empresas.map(e => data[e]),
           borderWidth: 1
         }]
       },
