@@ -9,6 +9,7 @@ body {
   flex-direction: column;
   background-color: white;
   font-family: "Monserrat";
+  height: 100vh;
 }
 
 canvas {
