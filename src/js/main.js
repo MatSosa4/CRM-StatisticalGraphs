@@ -109,10 +109,10 @@ import moment from "moment";
 
 // API Variables
 const host = 'localhost';
-const port = '8081';
+const port = '5010';
 
 export function getAPIUrl() {
-  return `http://${host}:${port}/api`;
+  return `http://${host}:${port}/api/Data`;
 }
 
 export async function getDataFromAPI(apiData) {
