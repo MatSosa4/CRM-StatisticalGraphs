@@ -8,7 +8,6 @@ body {
   margin: 0 25px;
   flex-direction: column;
   background-color: white;
-  height: 100vh;
   font-family: "Monserrat";
 }
 
@@ -24,13 +23,16 @@ canvas {
 }
 
 #filters {
-  width: 15%;
+  flex-wrap: wrap;
   display: flex;
+  gap: 8px;
   justify-content: space-between;
 }
 
 #header {
+  flex-wrap: wrap;
   display: flex;
+  gap: 10px;
   justify-content: space-around;
 }
 
@@ -56,17 +58,18 @@ canvas {
 }
 
 #search-date{
-  margin-left: 1vw;
+  margin-left: 4px;
   display: flex;
   background-color: rgb(29, 112, 184);
   border: none;
-  border-radius: 0.3vw;
+  border-radius: 3px;
   color: white;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  padding-top: 0.3vw;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   cursor: pointer;
-  font-size: 1vw;
+  font-size: 13.5px;
   font-family: "Monserrat";
 
 }
@@ -76,17 +79,18 @@ canvas {
 }
 
 #reload{
-  margin-left: 1vw;
+  margin-left: 4px;
   display: flex;
   background-color: rgb(29, 112, 184);
   border: none;
-  border-radius: 0.3vw;
+  border-radius: 3px;
   color: white;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  padding-top: 0.3vw;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   cursor: pointer;
-  font-size: 1vw;
+  font-size: 13.5px;
   font-family: "Monserrat";
 
 }
@@ -96,16 +100,16 @@ canvas {
 }
 
 #select-table{
-  border-radius: 0.3vw;
+  border-radius: 3px;
   font-family: "Monserrat";
-  font-size: 1vw;
+  font-size: 13.5px;
   cursor: pointer;
 
 }
 
 #date-picker{
-  border-radius: 0.3vw;
+  border-radius: 3px;
   font-family: "Monserrat";
-  font-size: 1vw;
+  font-size: 13.5px;
   cursor: pointer;
 }
