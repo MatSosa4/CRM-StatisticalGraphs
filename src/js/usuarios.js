@@ -115,6 +115,10 @@ function displayDynamicTable(value) {
         }))
       },
       options: {
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
         datasets: {
           bar: {
             barPercentage: 0.65
