@@ -1,7 +1,7 @@
 import Chart from 'chart.js/auto';
 import moment from 'moment';
 
-import { getISOWeekNumber } from './utils';
+import { addDateValueToURLApi, getISOWeekNumber } from './utils';
 import { servicios, empresas } from './main';
 import { getDataFromAPI } from './main';
 
@@ -16,7 +16,7 @@ let canvas2;;
 function displayDynamicTable() {
   const value = 'promociones';
 
-  let apiCall = `${value}${value.includes('?') ? '&' : '?'}fecha=${datePicker.value}`;  // string
+  let apiCall = addDateValueToURLApi(value, datePicker);
   weeks = getISOWeekNumber(datePicker.value ? moment(datePicker.value) : moment(), 4);
 
   if (canvas1) canvas1.destroy();

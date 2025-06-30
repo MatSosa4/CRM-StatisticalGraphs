@@ -22,6 +22,7 @@ function displayDynamicTable() {
   if (canvas2) canvas2.destroy();
   if (canvas3) canvas3.destroy();
 
+  // Conteo Semanal de Leads
   getDataFromAPI('leads').then((res) => {
     const data = {};
 
@@ -83,6 +84,7 @@ function displayDynamicTable() {
     });
   });
 
+  // Conteo Semanal de Propuestas
   getDataFromAPI('propuestas').then((res) => {
     const data = {};
 
@@ -144,6 +146,7 @@ function displayDynamicTable() {
     });
   });
 
+  // Conteo Semanal de Cierres
   getDataFromAPI('cierres').then((res) => {
     const data = {};
 

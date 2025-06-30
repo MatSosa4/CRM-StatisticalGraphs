@@ -22,6 +22,7 @@ function displayDynamicTable() {
   if (canvas2) canvas2.destroy();
   if (canvas3) canvas3.destroy();
 
+  // Conteo TOTAL de Base en todas las fechas (fecha=all)
   getDataFromAPI('bases?estado=Base&fecha=all').then((res) => {
     const data = {};
 
@@ -72,6 +73,7 @@ function displayDynamicTable() {
     });
   });
 
+  // Conteo TOTAL de Contactos en todas las fechas (fecha=all)
   getDataFromAPI('bases?estado=Contacto&fecha=all').then((res) => {
     const data = {};
 
@@ -122,6 +124,7 @@ function displayDynamicTable() {
     });
   });
 
+  // Conteo Semanal de Bases Inhabilitadas
   getDataFromAPI(addDateValueToURLApi('bases?estado=Inhabilitado', datePicker)).then((res) => {
     const data = {};
 

@@ -20,15 +20,14 @@ let weeks;
 // se cambia la data del gráfico, rescatando diferentes datos pero siempre el conteo de usuarios por
 // semana.
 function displayDynamicTable(value) {
+  // value: nombre_tabla
   const tableName = String(value).charAt(0).toUpperCase() + String(value).slice(1).split('?')[0];  // bases?param=value
   weeks = getWeeks(datePicker.value);
 
   if (canvas1) canvas1.destroy();  // Remove actual data
   if (canvas2) canvas2.destroy();  // Remove actual data
 
-  console.log(addDateValueToURLApi(value, datePicker));
-  console.log(value);
-
+  // Gráfico Barras Conteo Semanal de `value`
   getDataFromAPI(addDateValueToURLApi(value, datePicker)).then((res) => {
     const data = {};
 
@@ -88,7 +87,7 @@ function displayDynamicTable(value) {
     });
   });
 
-  // States
+  // Gráfico Barras Conteo Semanal de Estados
   getDataFromAPI(addDateValueToURLApi(value, datePicker)).then((res) => {
     const data = {};
     data.total = Array(4).fill(0);
@@ -107,7 +106,6 @@ function displayDynamicTable(value) {
     const states = Object.keys(data);
     states.splice(states.indexOf('total'), 1)  // No 'total' in states
 
-    // Estados
     canvas2 = new Chart(statesChart, {
       type: 'bar',
       data: {
@@ -160,7 +158,6 @@ function displayDynamicTable(value) {
 
 displayDynamicTable(selectTable.value);  // Empieza siempre en Base
 
-// When modified
 selectTable.addEventListener('change', () => displayDynamicTable(selectTable.value));
 
 document.getElementById('search-date').addEventListener('click', () => displayDynamicTable(selectTable.value));
