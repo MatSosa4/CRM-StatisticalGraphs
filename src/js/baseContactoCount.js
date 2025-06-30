@@ -1,8 +1,9 @@
 import Chart from 'chart.js/auto';
 import moment from 'moment';
 
-import { getApiCall, getDataFromAPI, getWeeks } from "./main";
-import { empresas, usuarios } from './main';
+import { getDataFromAPI, getWeeks } from "./main";
+import { empresas } from './main';
+import { addDateValueToURLApi } from './utils'
 
 const basesActivos = document.getElementById('base-activos');
 const contactosActivos = document.getElementById('contactos-activos');
@@ -121,7 +122,7 @@ function displayDynamicTable() {
     });
   });
 
-  getDataFromAPI(getApiCall('bases?estado=Inhabilitado', datePicker)).then((res) => {
+  getDataFromAPI(addDateValueToURLApi('bases?estado=Inhabilitado', datePicker)).then((res) => {
     const data = {};
 
     // { tipo: [] }

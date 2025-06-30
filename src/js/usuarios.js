@@ -1,8 +1,9 @@
 import moment from "moment";
 import Chart from 'chart.js/auto';
 
-import { getApiCall, getDataFromAPI, getWeeks, empresas } from "./main";
+import { getDataFromAPI, getWeeks } from "./main";
 import { usuarios } from "./main";
+import { addDateValueToURLApi } from "./utils";
 
 const usersChart = document.getElementById('users-chart');
 const statesChart = document.getElementById('states-chart');
@@ -25,7 +26,10 @@ function displayDynamicTable(value) {
   if (canvas1) canvas1.destroy();  // Remove actual data
   if (canvas2) canvas2.destroy();  // Remove actual data
 
-  getDataFromAPI(getApiCall(value, datePicker)).then((res) => {
+  console.log(addDateValueToURLApi(value, datePicker));
+  console.log(value);
+
+  getDataFromAPI(addDateValueToURLApi(value, datePicker)).then((res) => {
     const data = {};
 
     usuarios.forEach(name => {
@@ -85,7 +89,7 @@ function displayDynamicTable(value) {
   });
 
   // States
-  getDataFromAPI(getApiCall(value, datePicker)).then((res) => {
+  getDataFromAPI(addDateValueToURLApi(value, datePicker)).then((res) => {
     const data = {};
     data.total = Array(4).fill(0);
 

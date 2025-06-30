@@ -1,4 +1,5 @@
 // ISO Week range
+// Envía una lista de fechas, desde la asignada en `date` hasta `numWeeks` para atrás
 export function getISOWeekRange(date, numWeeks) {
   const now = date;
   const dates = [];
@@ -13,6 +14,7 @@ export function getISOWeekRange(date, numWeeks) {
 }
 
 // ISO Week Number
+// Envía una lista de números de semana desde `date` hasta `numWeeks` para atrás
 export function getISOWeekNumber(date, numWeeks) {
   const now = date;
   const nums = [];
@@ -24,4 +26,9 @@ export function getISOWeekNumber(date, numWeeks) {
   }
 
   return nums.sort();
+}
+
+// Añade únicamente la fecha enviando el datePicker de HTML
+export function addDateValueToURLApi(value, datePicker) {
+  return `${value}${value.includes('?') ? '&' : '?'}fecha=${datePicker.value}`
 }

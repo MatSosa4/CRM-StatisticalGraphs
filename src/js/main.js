@@ -104,17 +104,19 @@
 //   }
 // });
 
-import { getISOWeekNumber } from "../backend/utils";
+import { getISOWeekNumber } from "./utils";
 import moment from "moment";
 
 // API Variables
 const host = 'localhost';
 const port = '5010';
 
+// URL de la API para no escribirla siempre
 export function getAPIUrl() {
   return `http://${host}:${port}/api/Data`;
 }
 
+// Obtiene información de la API en JSON
 export async function getDataFromAPI(apiData) {
   const url = `${getAPIUrl()}/${apiData}`;
 
@@ -122,12 +124,9 @@ export async function getDataFromAPI(apiData) {
   return await res.json();
 }
 
+// Obtiene el rango de 4 semanas si se envía una fecha, sino, la fecha actual
 export function getWeeks(dateValue) {
   return getISOWeekNumber(dateValue ? moment(dateValue) : moment(), 4);
-}
-
-export function getApiCall(value, datePicker) {
-  return `${value}${value.includes('?') ? '&' : '?'}fecha=${datePicker.value}`
 }
 
 // Empresas y Servicios accesibles
